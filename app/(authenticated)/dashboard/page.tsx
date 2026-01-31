@@ -9,7 +9,7 @@ export default function Dashboard() {
                 <Header />
 
                 {/* Filters */}
-                <div className="bg-white dark:bg-[#1f1e2e] p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col lg:flex-row gap-4">
+                <div className="bg-white dark:bg-[#1f1e2e] p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col lg:flex-row gap-4 lg:items-end">
                     <div className="flex-1 relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <span className="material-symbols-outlined text-slate-400">
@@ -17,7 +17,7 @@ export default function Dashboard() {
                             </span>
                         </div>
                         <input
-                            className="block w-full pl-10 pr-3 py-3 border border-slate-200 dark:border-slate-600 rounded-lg leading-5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-shadow"
+                            className="block w-full pl-10 pr-3 py-2.5 border border-slate-200 dark:border-slate-600 rounded-lg leading-5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-shadow"
                             placeholder="Search by ID KK or Barcode..."
                             type="text"
                         />

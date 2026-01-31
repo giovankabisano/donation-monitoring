@@ -127,18 +127,18 @@ export default function InputData() {
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onKeyDown={handleKeyDown}
                             />
-                            <div className="absolute inset-y-0 right-2 flex items-center gap-2">
+                            <div className="absolute inset-y-0 right-2 flex items-center gap-1">
                                 {searchQuery && (
                                     <button
                                         onClick={() => setSearchQuery("")}
-                                        className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400 hover:text-slate-600 transition-colors"
+                                        className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 transition-colors"
                                     >
                                         <span className="material-symbols-outlined text-[20px]">close</span>
                                     </button>
                                 )}
                                 <button
                                     onClick={handleSearch}
-                                    className="px-4 py-1.5 text-sm font-medium bg-primary text-white rounded-lg shadow-sm hover:bg-primary/90 transition-colors"
+                                    className="h-8 px-4 text-sm font-medium bg-primary text-white rounded-lg shadow-sm hover:bg-primary/90 transition-colors flex items-center"
                                 >
                                     Cari
                                 </button>
