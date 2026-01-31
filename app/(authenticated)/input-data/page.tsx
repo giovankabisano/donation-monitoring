@@ -11,8 +11,8 @@ interface EnvelopeData {
 export default function InputData() {
     const { toggleSidebar } = useSidebar();
     const [searchQuery, setSearchQuery] = useState("KK-2026-001");
-    // ... rest of state
     const [showResults, setShowResults] = useState(false);
+    const [notFound, setNotFound] = useState(false);
 
     // State for all 7 envelopes
     const [envelopes, setEnvelopes] = useState<{ [id: number]: EnvelopeData }>({
@@ -22,7 +22,18 @@ export default function InputData() {
     const searchInputRef = useRef<HTMLInputElement>(null);
 
     const handleSearch = () => {
-        setShowResults(true);
+        if (!searchQuery.trim()) {
+            handleClose();
+            return;
+        }
+
+        if (searchQuery === "kode_salah") {
+            setNotFound(true);
+            setShowResults(false);
+        } else {
+            setNotFound(false);
+            setShowResults(true);
+        }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -33,6 +44,7 @@ export default function InputData() {
 
     const handleClose = () => {
         setShowResults(false);
+        setNotFound(false);
         setSearchQuery("");
         setEnvelopes({ 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {} });
         setTimeout(() => {
@@ -147,13 +159,23 @@ export default function InputData() {
                     </div>
 
                     {!showResults ? (
-                        <div className="flex flex-col items-center justify-center py-20 text-slate-400">
-                            <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6">
-                                <span className="material-symbols-outlined text-5xl opacity-50">search</span>
+                        notFound ? (
+                            <div className="flex flex-col items-center justify-center py-20 text-slate-400 animate-fade-in-up">
+                                <div className="w-24 h-24 bg-red-50 dark:bg-red-900/10 rounded-full flex items-center justify-center mb-6">
+                                    <span className="material-symbols-outlined text-5xl text-red-500 opacity-80">error</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2">Data tidak ditemukan</h3>
+                                <p className="text-center max-w-md text-slate-500">ID KK <strong>"{searchQuery}"</strong> tidak terdaftar dalam sistem. Mohon periksa kembali ID yang dimasukkan.</p>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2">Belum ada data ditampilkan</h3>
-                            <p className="text-center max-w-md text-slate-500">Silakan scan barcode pada amplop atau masukkan ID Kartu Keluarga untuk memulai input data amplop.</p>
-                        </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center py-20 text-slate-400">
+                                <div className="w-24 h-24 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-6">
+                                    <span className="material-symbols-outlined text-5xl opacity-50">search</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2">Belum ada data ditampilkan</h3>
+                                <p className="text-center max-w-md text-slate-500">Silakan scan barcode pada amplop atau masukkan ID Kartu Keluarga untuk memulai input data amplop.</p>
+                            </div>
+                        )
                     ) : (
                         <div className="animate-fade-in-up">
                             {/* Result Section */}
