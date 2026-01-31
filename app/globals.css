@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: var(--font-inter), var(--font-noto-sans), sans-serif;
+  
+  --color-primary: #5048e5;
+  --color-background-light: #f6f6f8;
+  --color-background-dark: #121121;
+  --color-slate-bg: #f1f5f9;
+
+  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  
+  /* Retain default border radius but essentially we can just use the defaults or override if specific map needed */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Custom Utilities if needed or just standard CSS */
+/* Replating the input styles from the HTML which used a form-input class? 
+   The HTML has `form-input` class which usually comes from @tailwindcss/forms. 
+   I should ensure I have that plugin or reproduce the styles.
+   The command initialized with app-tw template which might not have forms plugin.
+   I'll add the base styles for input resetting if needed, but Tailwind defaults are usually enough with class utilities. 
+   However, `form-input` class specifically implies the forms plugin.
+   Let's check if package.json has it. Even if not, I can just use the utility classes provided in the HTML 
+   (w-full rounded-lg border-slate-200 ...). 
+   Wait, the HTML uses `form-input` AND utility classes. `form-input` gives a specific look. 
+   I will install @tailwindcss/forms just in case or just rely on utilities.
+   Given the detailed utility classes in the HTML (border-slate-200, focus:ring-2 etc), `form-input` might be doing the base reset.
+   I will just add the plugin or manual styles if it looks off. For now, I'll assume standard utilities do the job. 
+*/
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-background-light dark:bg-background-dark min-h-screen;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
